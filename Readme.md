@@ -100,3 +100,72 @@ Rust is statically typed language -> must know the types of all variables at com
     }
 
 }
+## Control flow
+
+### If expression
+    Rust will not automically try to convert non-boolean  types to boolean.
+    We must explict and alway provide if with boolean as its condition.
+    Rust only executes the block  for the first true condtion
+#### Using if in a let statement
+    Because if is expression, we can use it on the right side of a let statement to assign the outcome to a variable.
+    let number = if condition { 5 } else { 6 };
+### Repetition with loop
+    If we have loop within loop, break and continue will apply to the innermost loop at the point.
+## Understanding Ownership
+    Ownership help Rust to make memory safety gurantees without need any garbase collector.
+    Ownership is the set of rules the the compiler check.
+### Ownership rules
+1. Each value in Rust has an owner.
+2. There can only be owner at a time.
+3. When the owner goes out of scope, the value will be dropped.
+
+#### Variable scope
+    {                      // s is not valid here, it’s not yet declared
+        let s = "hello";   // s is valid from this point forward
+        // do stuff with s
+    }                      // this scope is now over, and s is no longer valid
+   
+        
+    the memory is automically returned once the variable that owns it goes out of  scope.
+    {
+    let s = String::from("hello"); // s is valid from this point forward
+
+        // do stuff with s
+    }                                  // this scope is now over, and s is no
+                                       // longer valid
+
+    When a variable goes out of scope, Rust call a special function: drop.
+#### Variables and Data Interacting with Move
+    When assign a new reference to an old one, Rust will invalid the old reference.
+    It known at a move.
+    Rust will never create deep copies of your data by default.
+#### Variables and Data Interacting with Clone
+    If we want to do deep copy the heap data of String. not just the stack data.
+    we can use the common method called clone.
+    When call clone -> some code will executed slower.
+####  Stack-only data: Copy
+    The types which have adready know the size at compile time are stored entirely on the stack, so copy the actual data is quick.
+####  Ownership and Function
+    fn main() {
+    let s = String::from("hello");  // s comes into scope
+    
+        takes_ownership(s);             // s's value moves into the function...
+                                        // ... and so is no longer valid here
+    
+        let x = 5;                      // x comes into scope
+    
+        makes_copy(x);                  // x would move into the function,
+                                        // but i32 is Copy, so it's okay to still
+                                        // use x afterward
+    
+    } // Here, x goes out of scope, then s. But because s's value was moved, nothing
+    // special happens.
+
+#### Return value and scope
+    Return value can also tranfer ownership.
+    The ownership of a variable flows the pattern:
+        assigning a value to another variable moves it.
+        When a variables that include data on heap goes out of scope, the value will be clean up by drop unless the ownership of a data has been moved to another variable.
+## References and Borrowing
+
+    
