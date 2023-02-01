@@ -206,7 +206,7 @@ Rust is statically typed language -> must know the types of all variables at com
     Struct update syntax like an assignment -> this is because it move data.
     -> No longer using the instance as a whole.
     
-#### Associated Functions
+### Associated Functions
     All function define in imp block are associated functions
 ## Enums and Pattern Matching
     Each variant can have different types and amount of associated data.
@@ -214,4 +214,3 @@ Rust is statically typed language -> must know the types of all variables at com
     matches Are Exhaustive
 
     _ is a special pattern that matches any value and does not bind to that value
-    
