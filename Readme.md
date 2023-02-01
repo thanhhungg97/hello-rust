@@ -167,5 +167,50 @@ Rust is statically typed language -> must know the types of all variables at com
         assigning a value to another variable moves it.
         When a variables that include data on heap goes out of scope, the value will be clean up by drop unless the ownership of a data has been moved to another variable.
 ## References and Borrowing
+    Refer to some value instead of taking ownership of it.
+    The action of create reference -> borrowing.
+    We are not allow to modify something we have a reference to.
 
+### Mutable reference
+    let mut s = String::from("hello");
+
+    change(&mut s);
+
+    if we have a mutable reference to a value, you can have no other reference to that value
+    let mut s1 = String::from("hello");
+    let tmp = &mut s1;
+    let tmp1 = &mut s1; // error
+    -> prevent multiple mutable reference to same data at the sametime.
+    -> Prevent data race at compile time.
+### Data race:
+    Happend when:
+        Two or more pointer access the same data  at the same time.
+        At least one of the pointer is being used to write to the data.
+        There's no mechanism being used to synchronize access to the data.
+    Can use curly bracket to create new scope.
+### Dangling References
     
+    dangling pointer -> a pointer point to some memory that given to someone else by freeing some memory but preserving a pointer to that memory.
+    fn dangle() -> &String { // dangle returns a reference to a String
+
+    let s = String::from("hello"); // s is a new String
+
+    &s // we return a reference to the String, s
+    } // Here, s goes out of scope, and is dropped. Its memory goes away.
+    // Danger!
+## Slide type
+    Let you reference a continous sequence of elements in a collection rather than the whole collection.
+## Struct
+    If the instance is multable, we can change the value by using dot notation and assigning to particular field.
+    -> Entire instance must be mutable.
+    Struct update syntax like an assignment -> this is because it move data.
+    -> No longer using the instance as a whole.
+    
+### Associated Functions
+    All function define in imp block are associated functions
+## Enums and Pattern Matching
+    Each variant can have different types and amount of associated data.
+### Match control flow structure
+    matches Are Exhaustive
+
+    _ is a special pattern that matches any value and does not bind to that value
