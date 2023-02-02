@@ -214,3 +214,40 @@ Rust is statically typed language -> must know the types of all variables at com
     matches Are Exhaustive
 
     _ is a special pattern that matches any value and does not bind to that value
+## Managing Growing Project
+
+### Package and Crates
+
+#### Crates
+    A crate is a smallest amount of code that compiler consider at a time.
+1. Binary   
+    Must have main function
+    Can compile to excutable file.
+2. Library
+    Dont have main function
+    Define functionality intended to be shared with multiple projects.
+#### Package
+    Bundle of one or more crates that provide a set of functionality.
+    Contain a Cargo.toml define how to build those crates.
+    A package can have multiple binary crate but have only one lib crate.
+    src/main.rs is the crate root of a binary crate with the same name as the package.
+    if the package contain src/lib.rs, the package contains a library crate with the same name as the package, and src/lib.rs is crate root.
+### Modules
+#### Cheat Sheet
+    How modules work:
+        Start from the crate root
+        Declaring modules: In the crate root file, you can declare new modules;
+        Declaring submodules: Any file other than crate root.
+        Paths to code in modules: Once module is part of your crate, you can refer to code in that module from anywhere else in the same crate.
+        Private vs public: Code within module is private from its parent by defautl. To make public -> pub mod instead mod.
+    The use keyword
+### Path
+    Rust use path to find a item in module tree.
+1. Absolute path
+   Is the full path from crate root
+2. Relative path
+    
+### Private by default
+    All item in Rust all private by parent module by default.
+    -> Hiding inner implementation details by default.
+    The pub keyword on the module only lets code in its ancestor refer to it, not access inner code.
